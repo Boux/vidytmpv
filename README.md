@@ -1,4 +1,4 @@
-## About
+## About vidytmpv
 
 Custom browser extension to play youtube videos directly in MPV
 

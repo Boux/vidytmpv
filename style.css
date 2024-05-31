@@ -1,0 +1,38 @@
+#video-preview {
+  pointer-events: none;
+  display: none;
+}
+
+ytd-thumbnail:hover a.bouxyt-thumbnail-button, a.bouxyt-thumbnail-button:hover {
+  opacity: 1
+}
+
+
+a.bouxyt-thumbnail-button {
+  opacity: 0;
+  z-index: 1000000;
+  position: absolute;
+  inset: auto auto 2px 2px;
+  cursor: pointer;
+  user-select: none;
+
+  padding: 2px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  transition: opacity 0.2s;
+}
+
+a.bouxyt-thumbnail-button img {
+  height: 32px;
+}
+
+a.bouxyt-description-button {
+  cursor: pointer;
+  user-select: none;
+  margin-left: 8px
+}
+
+a.bouxyt-description-button img {
+  height: 40px;
+}

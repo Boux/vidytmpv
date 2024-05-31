@@ -1,21 +1,28 @@
-function getUrl() {
-  return `bouxyt://${document.location.href}'`
+const iconSrc = "https://raw.githubusercontent.com/mpv-player/mpv/master/etc/mpv-icon.ico"
+
+function getUrl(url = document.location.href) {
+  return `bouxyt://${url}'`
 }
 
-function tryAddButton(attempts = 20, timeoutInterval = 100) {
+function createButton(url = getUrl(), classname) {
+  const buttonEl = document.createElement("a")
+  buttonEl.setAttribute("href", url)
+
+  if (classname)
+    buttonEl.classList.add(classname)
+
+  buttonEl.innerHTML = `<img src='${iconSrc}'>`
+  return buttonEl
+}
+
+function tryAddDescriptionButton(attempts = 20, timeoutInterval = 100) {
   const menuEl = document.querySelector("#actions")
   if (!menuEl && attempts > 0) {
-    setTimeout(x => { tryAddButton(attempts - 1, timeoutInterval) }, timeoutInterval)
+    setTimeout(x => { tryAddDescriptionButton(attempts - 1, timeoutInterval) }, timeoutInterval)
     return
   }
 
-  const iconUrl = "https://raw.githubusercontent.com/mpv-player/mpv/master/etc/mpv-icon.ico"
-
-  const buttonEl = document.createElement("a")
-  buttonEl.setAttribute("href", getUrl())
-  buttonEl.setAttribute("style", "margin-left: 8px; cursor: pointer; user-select: none;")
-
-  buttonEl.innerHTML = `<img src='${iconUrl}' style='height: 40px;'>`
+  const buttonEl = createButton(getUrl(), "bouxyt-description-button")
 
   buttonEl.addEventListener("mouseover", e => {
     buttonEl.setAttribute("href", getUrl())
@@ -28,6 +35,35 @@ function tryAddButton(attempts = 20, timeoutInterval = 100) {
   menuEl.appendChild(buttonEl)
 }
 
+function addThumbnailButtons() {
+  const thumbnails = document.querySelectorAll("ytd-thumbnail")
+
+  thumbnails.forEach(el => {
+    if (el?.hasBouxYtButton) return
+
+    hrefEl = el?.querySelector(".yt-simple-endpoint")
+    const url = hrefEl?.href
+    if(!url) return
+
+    const buttonEl = createButton(getUrl(url), "bouxyt-thumbnail-button")
+
+    buttonEl.addEventListener("click", e => {
+      e.stopPropagation()
+    })
+
+    el.hasBouxYtButton = true
+
+    let container = el.closest("ytd-thumbnail")
+    container ??= el
+    container.appendChild(buttonEl)
+  })
+
+}
+
 window.addEventListener("load", (event) => {
-  tryAddButton(20, 100)
+  tryAddDescriptionButton(20, 100)
+
+  setInterval(x => {
+    addThumbnailButtons()
+  }, 500)
 });

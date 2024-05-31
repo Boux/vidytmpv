@@ -10,7 +10,8 @@
     {
       "matches": ["*://*.youtube.com/*"],
       "all_frames": true,
-      "js": ["vidytmpv.js"]
+      "js": ["vidytmpv.js"],
+      "css": ["style.css"]
     }
   ]
 

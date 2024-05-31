@@ -1,0 +1,6 @@
+#! /bin/zsh
+
+if [[ "$1" == "vidytmpv:"* ]]; then
+    ref=${1#vidytmpv://}
+    pipe-viewer $ref
+fi

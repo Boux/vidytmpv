@@ -3,12 +3,12 @@
   display: none;
 }
 
-ytd-thumbnail:hover a.bouxyt-thumbnail-button, a.bouxyt-thumbnail-button:hover {
+ytd-thumbnail:hover a.vidytmpv-thumbnail-button, a.vidytmpv-thumbnail-button:hover {
   opacity: 1
 }
 
 
-a.bouxyt-thumbnail-button {
+a.vidytmpv-thumbnail-button {
   opacity: 0;
   z-index: 1000000;
   position: absolute;
@@ -23,16 +23,16 @@ a.bouxyt-thumbnail-button {
   transition: opacity 0.2s;
 }
 
-a.bouxyt-thumbnail-button img {
+a.vidytmpv-thumbnail-button img {
   height: 32px;
 }
 
-a.bouxyt-description-button {
+a.vidytmpv-description-button {
   cursor: pointer;
   user-select: none;
   margin-left: 8px
 }
 
-a.bouxyt-description-button img {
+a.vidytmpv-description-button img {
   height: 40px;
 }

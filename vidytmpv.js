@@ -1,7 +1,7 @@
 const iconSrc = "https://raw.githubusercontent.com/mpv-player/mpv/master/etc/mpv-icon.ico"
 
 function getUrl(url = document.location.href) {
-  return `bouxyt://${url}'`
+  return `vidytmpv://${url}'`
 }
 
 function createButton(url = getUrl(), classname) {
@@ -22,7 +22,7 @@ function tryAddDescriptionButton(attempts = 20, timeoutInterval = 100) {
     return
   }
 
-  const buttonEl = createButton(getUrl(), "bouxyt-description-button")
+  const buttonEl = createButton(getUrl(), "vidytmpv-description-button")
 
   buttonEl.addEventListener("mouseover", e => {
     buttonEl.setAttribute("href", getUrl())
@@ -39,19 +39,19 @@ function addThumbnailButtons() {
   const thumbnails = document.querySelectorAll("ytd-thumbnail")
 
   thumbnails.forEach(el => {
-    if (el?.hasBouxYtButton) return
+    if (el?.hasVidytmpvButton) return
 
     hrefEl = el?.querySelector(".yt-simple-endpoint")
     const url = hrefEl?.href
     if(!url) return
 
-    const buttonEl = createButton(getUrl(url), "bouxyt-thumbnail-button")
+    const buttonEl = createButton(getUrl(url), "vidytmpv-thumbnail-button")
 
     buttonEl.addEventListener("click", e => {
       e.stopPropagation()
     })
 
-    el.hasBouxYtButton = true
+    el.hasVidytmpvButton = true
 
     let container = el.closest("ytd-thumbnail")
     container ??= el

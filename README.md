@@ -1,6 +1,8 @@
+## About
+
 Custom browser extension to play youtube videos directly in MPV
 
-# Setup
+## Setup
 
 This is currently Linux only, unless you can figure out the way to execute a script through a custom URL scheme on other OSes
 

@@ -14,3 +14,8 @@ Dependencies: `pipe-viewer`, `mpv`, `zsh`
 - install the mpv opener script to somewhere in your path `cp ./scripts/vidytmpv-scheme-open ~/.local/bin/`, this script uses zsh, but you can change it to bash if you don't have zsh installed
 - add this line under `[Added Associations]`: `x-scheme-handler/vidytmpv=vidytmpv-handler.desktop` in `~/.config/mimeapps.list` or your distro's equivalent
 - manually install the extension (tested on brave, you may need to enable developer mode)
+
+Here it is in action, adds buttons on every thumbnail, and in the video description.
+
+https://github.com/Boux/vidytmpv/assets/2771413/5b9f444b-b004-4453-acda-cc5569ac8750
+

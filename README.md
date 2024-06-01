@@ -2,6 +2,13 @@
 
 Custom browser extension to play youtube videos directly in MPV
 
+## How it works
+
+- A browser extension adds buttons on the thumbnails with a custom url (such as `vidytmpv://https://www.youtube.com/watch?v=Omy3BERUd1g`).
+- A custom mimetype (`x-scheme-handler/vidytmpv`) captures `vidytmpv://` urls and is configured to point to a `vidytmpv-handler.desktop` file.
+- The `vidytmpv-handler.desktop` file calls a shell script that executes [pipe-viewer](https://github.com/trizen/pipe-viewer) with the correct youtube video url.
+- `pipe-viewer` streams the video to `mpv`. It can be configured to launch `vlc` instead.
+
 ## Setup
 
 This is currently Linux only, unless you can figure out the way to execute a script through a custom URL scheme on other OSes

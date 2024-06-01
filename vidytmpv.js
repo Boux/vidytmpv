@@ -24,7 +24,7 @@ function tryAddDescriptionButton(attempts = 20, timeoutInterval = 100) {
 
   const buttonEl = createButton(getUrl(), "vidytmpv-description-button")
 
-  buttonEl.addEventListener("mouseover", e => {
+  buttonEl.addEventListener("mouseenter", e => {
     buttonEl.setAttribute("href", getUrl())
   })
 
@@ -35,27 +35,36 @@ function tryAddDescriptionButton(attempts = 20, timeoutInterval = 100) {
   menuEl.appendChild(buttonEl)
 }
 
+function getVideoHrefForElem(el) {
+  return el?.querySelector(".yt-simple-endpoint")?.href
+}
+
 function addThumbnailButtons() {
   const thumbnails = document.querySelectorAll("ytd-thumbnail")
 
   thumbnails.forEach(el => {
-    if (el?.hasVidytmpvButton) return
+    if (el?._vidytmpvButtonEl) return
 
-    hrefEl = el?.querySelector(".yt-simple-endpoint")
-    const url = hrefEl?.href
+    const url = getVideoHrefForElem(el)
     if(!url) return
 
     const buttonEl = createButton(getUrl(url), "vidytmpv-thumbnail-button")
+
+    // refresh button url when hovering it (it can sometimes be the wrong url when the layout of the page changes)
+    buttonEl.addEventListener("mouseenter", e => {
+      const parentEl = buttonEl.closest("ytd-thumbnail")
+      const refreshedUrl = getVideoHrefForElem(parentEl)
+      if(!refreshedUrl) return
+
+      buttonEl.setAttribute("href", getUrl(refreshedUrl))
+    })
 
     buttonEl.addEventListener("click", e => {
       e.stopPropagation()
     })
 
-    el.hasVidytmpvButton = true
-
-    let container = el.closest("ytd-thumbnail")
-    container ??= el
-    container.appendChild(buttonEl)
+    el._vidytmpvButtonEl = buttonEl
+    el.appendChild(buttonEl)
   })
 
 }
